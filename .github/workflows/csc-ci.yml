@@ -39,7 +39,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: /home/runner/work/CoffeeShopCoders/CoffeeShopCoders/frontend/package.json
+        working-directory: /home/runner/work/CoffeeShopCoders/CoffeeShopCoders/frontend
 
       - name: Lint code
         run: npm run lint
