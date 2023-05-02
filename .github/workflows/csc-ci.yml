@@ -62,15 +62,20 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
       - name: Build Docker image
         run: |
           cd backend
           docker build -t csc-backend .
           cd ../frontend
           docker build -t csc-frontend .
-          docker tag csc-backend:latest 731436112197.dkr.ecr.us-east-1.amazonaws.com/csc-backend:latest
-          docker tag csc-frontend:latest 731436112197.dkr.ecr.us-east-1.amazonaws.com/csc-frontend:latest
+          docker tag csc-backend:latest ${{ steps.login-ecr.outputs.registry }}/csc-backend:latest
+          docker tag csc-frontend:latest ${{ steps.login-ecr.outputs.registry }}/csc-frontend:latest
+
       - name: Push Docker images
         run: |
-          docker push 731436112197.dkr.ecr.us-east-1.amazonaws.com/csc-backend:latest
-          docker push 731436112197.dkr.ecr.us-east-1.amazonaws.com/csc-frontend:latest
+          docker push ${{ steps.login-ecr.outputs.registry }}/csc-backend:latest
+          docker push ${{ steps.login-ecr.outputs.registry }}/csc-frontend:latest
