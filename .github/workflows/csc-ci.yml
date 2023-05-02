@@ -72,5 +72,5 @@ jobs:
           docker tag csc-frontend:latest 731436112197.dkr.ecr.us-east-1.amazonaws.com/csc-frontend:latest
       - name: Push Docker images
         run: |
-          docker push 731436112197.dkr.ecr.us-east-1.amazonaws.com/coffeeshopcoders:latest
-          docker push 731436112197.dkr.ecr.us-east-1.amazonaws.com/coffeeshopcoders:latest
+          docker push 731436112197.dkr.ecr.us-east-1.amazonaws.com/csc-backend:latest
+          docker push 731436112197.dkr.ecr.us-east-1.amazonaws.com/csc-frontend:latest
