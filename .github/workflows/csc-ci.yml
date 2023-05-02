@@ -9,7 +9,6 @@ on:
 jobs:
   backend-linting:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -27,7 +26,6 @@ jobs:
 
   frontend-linting:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -44,3 +42,35 @@ jobs:
       - name: Lint code
         run: npm run lint
         working-directory: /home/runner/work/CoffeeShopCoders/CoffeeShopCoders/frontend
+  
+  publish-final-image:
+    needs:
+      - frontend-linting
+      - backend-linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Build Docker image
+        run: |
+          cd backend
+          docker build -t csc-backend .
+          cd ../frontend
+          docker build -t csc-frontend .
+          docker tag csc-backend:latest 731436112197.dkr.ecr.us-east-1.amazonaws.com/csc-backend:latest
+          docker tag csc-frontend:latest 731436112197.dkr.ecr.us-east-1.amazonaws.com/csc-frontend:latest
+      - name: Push Docker images
+        run: |
+          docker push 731436112197.dkr.ecr.us-east-1.amazonaws.com/coffeeshopcoders:latest
+          docker push 731436112197.dkr.ecr.us-east-1.amazonaws.com/coffeeshopcoders:latest
