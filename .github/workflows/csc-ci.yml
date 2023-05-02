@@ -9,7 +9,6 @@ on:
 jobs:
   backend-linting:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -27,7 +26,6 @@ jobs:
 
   frontend-linting:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -44,3 +42,42 @@ jobs:
       - name: Lint code
         run: npm run lint
         working-directory: /home/runner/work/CoffeeShopCoders/CoffeeShopCoders/frontend
+  
+  publish-final-image:
+    needs:
+      - frontend-linting
+      - backend-linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Install AWS CLI
+        uses: aws-actions/setup-aws-cli@v2
+
+      - name: Login to AWS
+        run: |
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_CLIENT_PASSWORD
+        env:
+          AWS_CLIENT_PASSWORD: ${{ secrets.AWS_CLIENT_PASSWORD }}
+
+      - name: Build Docker image
+        run: |
+          cd backend
+          docker build -t csc-backend .
+          cd ../frontend
+          docker build -t csc-frontend .
+          docker tag csc-backend:latest ${{ secrets.AWS_CLIENT_PASSWORD}}/csc-backend:latest
+          docker tag csc-frontend:latest ${{ secrets.AWS_CLIENT_PASSWORD}}/csc-frontend:latest
+        env:
+          AWS_CLIENT_PASSWORD: ${{ secrets.AWS_CLIENT_PASSWORD }}
+
+      - name: Push Docker images
+        run: |
+          docker push ${{ secrets.AWS_CLIENT_PASSWORD}}/coffeeshopcoders:latest
+          docker push ${{ secrets.AWS_CLIENT_PASSWORD}}/coffeeshopcoders:latest
+        env:
+          AWS_CLIENT_PASSWORD: ${{ secrets.AWS_CLIENT_PASSWORD}}
