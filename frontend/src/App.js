@@ -29,7 +29,11 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
+<<<<<<< HEAD
           Learnings React
+=======
+          Learning React
+>>>>>>> 98e541ac17911e835c790ed1aa97164ce61b1e32
         </a>
 
         <p>{data}</p>
