@@ -66,16 +66,34 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build Docker image
+      - name: Build, tag, and push frontend image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: coffeeshopcoders
+          IMAGE_TAG: coffee-shop-coders-frontend-latest
         run: |
-          cd backend
-          docker build -t csc-backend .
-          cd ../frontend
-          docker build -t csc-frontend .
-          docker tag csc-backend:latest ${{ steps.login-ecr.outputs.registry }}/csc-backend:latest
-          docker tag csc-frontend:latest ${{ steps.login-ecr.outputs.registry }}/csc-frontend:latest
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-      - name: Push Docker images
+      - name: Build, tag, and push backend image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: coffeeshopcoders
+          IMAGE_TAG: coffee-shop-coders-backend-latest
         run: |
-          docker push ${{ steps.login-ecr.outputs.registry }}/csc-backend:latest
-          docker push ${{ steps.login-ecr.outputs.registry }}/csc-frontend:latest
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      # - name: Build Docker image
+      #   run: |
+      #     cd backend
+      #     docker build -t csc-backend .
+      #     cd ../frontend
+      #     docker build -t csc-frontend .
+      #     docker tag csc-backend:latest ${{ steps.login-ecr.outputs.registry }}/csc-backend:latest
+      #     docker tag csc-frontend:latest ${{ steps.login-ecr.outputs.registry }}/csc-frontend:latest
+
+      # - name: Push Docker images
+      #   run: |
+      #     docker push ${{ steps.login-ecr.outputs.registry }}/csc-backend:latest
+      #     docker push ${{ steps.login-ecr.outputs.registry }}/csc-frontend:latest
