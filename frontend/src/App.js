@@ -29,7 +29,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learning React
+          Learnings React
         </a>
 
         <p>{data}</p>
