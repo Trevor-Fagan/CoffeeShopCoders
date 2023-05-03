@@ -7,6 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 
+# default route for now
 @app.route('/api')
 def hello_world():
     return 'Hello, World!'
