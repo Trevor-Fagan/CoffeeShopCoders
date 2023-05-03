@@ -19,6 +19,7 @@ Perhaps guest videos and lecture from Google Student Developer Clubs leaders.
 # Backend
 - Python
 - Flask
+- Kubernetes
 
 # CI/CD
 - Github actions
@@ -33,7 +34,6 @@ Perhaps guest videos and lecture from Google Student Developer Clubs leaders.
 - AWS Elastic Container Registry
 - AWS MySQL RDS
 - Prometheus AWS DB
-- Google Cloud buckets for Helm chart repository
 
 # Other
 - Hosting: Digital Ocean
