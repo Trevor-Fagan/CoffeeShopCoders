@@ -2,3 +2,5 @@ Flask
 python-dotenv
 flask-cors
 flake8
+gunicorn
+wheel
