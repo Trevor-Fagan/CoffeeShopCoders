@@ -4,4 +4,4 @@ COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 COPY . .
 ENV FLASK_APP=app.py
-CMD . ./venv/bin/activate && gunicorn --bind 0.0.0.0:5000 wsgi:app
+CMD ["/bin/bash", "-c", "source ./venv/bin/activate && gunicorn --bind 0.0.0.0:5000 wsgi:app"]
