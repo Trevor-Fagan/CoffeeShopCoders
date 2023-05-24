@@ -25,4 +25,4 @@ def main_page():
 
 @app.route('/api')
 def hello_world():
-    return 'Hello, World, maybe this works idk'
+    return 'Hello, World, maybe this works'

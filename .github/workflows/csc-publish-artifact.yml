@@ -53,6 +53,7 @@ jobs:
         run: |
           cd frontend
           npm run build
+          mkdir ../backend/frontend-build
           cp -r build/* ../backend/frontend-build
 
       - name: Build, tag, and push backend image to Amazon ECR
