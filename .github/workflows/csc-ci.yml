@@ -53,6 +53,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14.x'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: /home/runner/work/CoffeeShopCoders/CoffeeShopCoders/frontend
+
       - name: Detect frontend changes
         uses: dorny/paths-filter@v2.11.1
         id: filter
