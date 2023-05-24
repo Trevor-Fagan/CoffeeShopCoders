@@ -96,7 +96,6 @@ jobs:
           cp -r build/* ../backend/frontend-build
 
       - name: Build, tag, and push backend image to Amazon ECR
-        if: steps.filter.outputs.backend == 'true'
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: coffeeshopcoders

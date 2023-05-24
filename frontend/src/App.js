@@ -30,7 +30,7 @@ function App() {
       <div className="main-content">
         Backend content: {data}
 
-        Hey something worked
+        Trying again
       </div>
 
       <div className="footer">
