@@ -18,22 +18,17 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learnings React
-        </a>
+      <div className="main-header">
+        <h1>Coffee Shop Coders</h1>
+      </div>
 
-        <p>{data}</p>
-      </header>
+      <div className="main-content">
+        Backend content: {data}
+      </div>
+
+      <div className="footer">
+        <p>© CoffeeShopCoders, 2023</p>
+      </div>
     </div>
   );
 }
