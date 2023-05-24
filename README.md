@@ -12,6 +12,7 @@ Perhaps guest videos and lecture from Google Student Developer Clubs leaders.
 4. Obtain UI design and build it out (working with UI designer to get this done)
 5. Figure out how to not have duplicates in AWS ECR
       Need to come up with versioning system
+6. Add prometheus and grafana monitoring and dashboards
 
 # Frontend
 - React
