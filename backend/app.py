@@ -12,9 +12,11 @@ CORS(app, origins='http://www.coffeeshopcoders.com')
 def catch_all(path):
     return render_template('index.html')
 
+
 @app.route('/')
 def main_page():
     return render_template("index.html")
+
 
 @app.route('/api')
 def hello_world():
