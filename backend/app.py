@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 
 load_dotenv()
+
 app = Flask(
     __name__,
     static_folder='frontend-build/static',
