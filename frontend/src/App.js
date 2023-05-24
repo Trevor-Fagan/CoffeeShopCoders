@@ -6,6 +6,11 @@ import React, { useEffect, useState } from 'react';
 function App() {
   const [data, setData] = useState([]);
 
+  // Enable CORS by setting the necessary headers
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://www.coffeeshopcoders.com/';
+  axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE';
+  axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+
   useEffect(() => {
     axios.get('http://coffeeshopcoders.com/api')
       .then(response => {
