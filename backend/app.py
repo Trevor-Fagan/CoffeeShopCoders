@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 
 load_dotenv()
+
 app = Flask(
     __name__,
     static_folder='frontend-build/static',
@@ -25,4 +26,3 @@ def main_page():
 @app.route('/api')
 def hello_world():
     return 'Hello, World!'
-
