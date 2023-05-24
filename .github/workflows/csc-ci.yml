@@ -80,24 +80,18 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push frontend image to Amazon ECR
-        if: steps.filter.outputs.frontend == 'true'
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: coffeeshopcoders
-          IMAGE_TAG: coffee-shop-coders-frontend-latest
+      - name: Create production frontend build
         run: |
           cd frontend
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          cd ..
+          npm run build
+          cp -r build/* ../backend/frontend-build
 
       - name: Build, tag, and push backend image to Amazon ECR
         if: steps.filter.outputs.backend == 'true'
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: coffeeshopcoders
-          IMAGE_TAG: coffee-shop-coders-backend-latest
+          IMAGE_TAG: coffee-shop-coders-latest
         run: |
           cd backend
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
