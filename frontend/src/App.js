@@ -29,6 +29,8 @@ function App() {
 
       <div className="main-content">
         Backend content: {data}
+
+        Hey something worked
       </div>
 
       <div className="footer">
