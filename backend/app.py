@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 load_dotenv()
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins='http://www.coffee-shop-coders.com')
 
 
 # default route for nows
