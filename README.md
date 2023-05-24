@@ -9,8 +9,9 @@ Perhaps guest videos and lecture from Google Student Developer Clubs leaders.
 1. Fix the CORS issue
 2. Create Cron job for authentication token for AWS ECR
 3. Add SSL certificate
-4. Obtain UI design and build it out
-5. Figure out how to not have duplicates in AWS ECR (wasted versioning)
+4. Obtain UI design and build it out (working with UI designer to get this done)
+5. Figure out how to not have duplicates in AWS ECR
+      Need to come up with versioning system
 
 # Frontend
 - React
