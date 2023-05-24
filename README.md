@@ -6,10 +6,9 @@ A website that is built to explain how it is built.
 Potential to expand to articles and coding related content.
 Perhaps guest videos and lecture from Google Student Developer Clubs leaders.
 
-1. Configure GCS bucket to work as a helm chart repository
-2. Create CI to work for building and publishing frontend/backend images
-3. Figure out how to connect nginx/nginx ingress controller and allow frontend/backend communication
-4. Configure DNS records to start serving content to coffeeshopcoders.com
+1. Fix the CORS issue
+2. Create Cron job for authentication token for AWS ECR
+3. Obtain UI design and build it out
 
 # Frontend
 - React
