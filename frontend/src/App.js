@@ -7,7 +7,7 @@ function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://backend-service.coffee-shop-coders.svc.cluster.local/')
+    axios.get('http://coffeeshopcoders.com/api')
       .then(response => {
         setData(response.data);
       })
